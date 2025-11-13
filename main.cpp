@@ -97,7 +97,7 @@ void Trie::insert(string word) {
 	cout << "Inserted: " << word << endl;
 }
 
-bool Trie::Search(string word) {
+bool Trie::search(string word) {
 	TrieNode* curr = root;
 	for (char c : word) {
            int in = c - 'a';
@@ -107,4 +107,15 @@ bool Trie::Search(string word) {
 	   curr = curr->children[in];
 	}
 	return curr->isEndOfWord;
+}
+
+void Trie::deleteWord(string word) {
+	if (search(word)) {
+	   deleteHelper(root, word, 0);
+	   cout << "Deleted: " << word << endl;
+	} else {
+	   cout << "Word is not found!" << endl;
+	}
+}
+
 }
