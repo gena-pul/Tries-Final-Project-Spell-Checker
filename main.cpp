@@ -83,3 +83,16 @@ bool Trie::deleteHelper(TrieNode* node, string word, int depth) {
 
    return false;
 }
+
+void Trie::insert(string word) {
+       TrieNode* curr = root;
+	for (char c : word) {
+	    int in = c - 'a';
+	   if (!curr->children[in]) {
+	       curr->children[in] = new TrieNode();
+	   }
+	   curr = curr->children[in];
+	}
+	curr->isEndOfWord = true;
+	cout << "Inserted: " << word << endl;
+}
