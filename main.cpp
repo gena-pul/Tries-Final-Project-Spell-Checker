@@ -96,3 +96,15 @@ void Trie::insert(string word) {
 	curr->isEndOfWord = true;
 	cout << "Inserted: " << word << endl;
 }
+
+bool Trie::Search(string word) {
+	TrieNode* curr = root;
+	for (char c : word) {
+           int in = c - 'a';
+	   if (!curr->children[in]) {
+	      return false;
+	   }
+	   curr = curr->children[in];
+	}
+	return curr->isEndOfWord;
+}
