@@ -46,3 +46,40 @@ void Trie::collectSuggestions(TrieNode* node, string fix, vector<string>& sugges
 	}
     }
 }
+
+bool Trie::deleteHelper(TrieNode* node, string word, int depth) {
+    if (!node) {
+       return false;
+    }
+
+    if (depth == word.size()) {
+       if (!node->isEndOfWord) {
+    	   return false;
+       }
+       node->isEndOfWord = false;
+
+       for (int i = 0; i < 26; i++) {
+           if (node->children[i]) {
+	       return false;
+           }
+       }
+       return true;
+    }
+
+   int in = word[depth] - 'a';
+   if (deleteHelper(node->children[in], word, depth + 1)) {
+      delete node->children[in];
+      node->children[in] = nullptr;
+
+     if (!node->isEndOfWord) {
+	for (int i = 0; i < 26; i++) {
+	    if (node->children[i]) {
+  		return false;
+	    }
+	}
+	return true;
+     }
+   }
+
+   return false;
+}
