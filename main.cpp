@@ -34,3 +34,15 @@ Trie::Trie() {
      root = new TrieNode();
 }
 
+void Trie::collectSuggestions(TrieNode* node, string fix, vector<string>& suggestions) {
+    if (node->isEndOfWord) {
+	suggestions.push_back(fix);
+    }
+
+    for (int i = 0; i < 26; i++) {
+	if (node->children[i]) {
+	   char nextChar = 'a' + i;
+	   collectSuggestions(node->children[i], fix + nextChar, suggestions);
+	}
+    }
+}
