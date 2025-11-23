@@ -151,3 +151,55 @@ void Trie::spellCheck(string word){
 	}
      }
 }
+
+int main() {
+   Trie trie;
+   int choice;
+   string word;
+
+   cout << "==== Trie Spell Check ====";
+
+   do {
+      cout << "\n1. Insert word";
+      cout << "\n2. Search word";
+      cout << "\n3. Delete word";
+      cout << "\n4. Spell check";
+      cout << "\n5. Exit";
+      cout << "\nEnter your choice: ";
+      cin >> choice;
+
+      switch (choice) {
+       case 1:
+          cout << "Enter word to insert: ";
+          cin >> word;
+          trie.insert(word);
+          break;
+       case 2:
+          cout << "Enter word to insert: ";
+          cin >> word;
+          if (trie.search(word)) {
+             cout << "Word found!\n";
+          } else {
+             cout << "Word not found.\n";
+          }
+          break;
+       case 3:
+          cout << "Enter word to delete: ";
+          cin >> word;
+          trie.deleteWord(word);
+          break;
+       case 4:
+	  cout << "Enter word to spell check: ";
+	  cin >> word;
+	  trie.spellCheck(word);
+	  break;
+       case 5:
+	  cout << "Exiting program...\n";
+	  break;
+       default:
+	   cout << "Invalid choice.\n";
+       }
+   } while (choice != 5);
+
+  return 0;
+}
