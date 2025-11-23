@@ -12,6 +12,7 @@ struct TrieNode {
       for(int i = 0; i < 26; i++){
 	children[i] = nullptr;
       }
+   }
 };
 
 class Trie {
@@ -118,4 +119,35 @@ void Trie::deleteWord(string word) {
 	}
 }
 
+void Trie::spellCheck(string word){
+      if (search(word)) {
+	 cout << word << " is spelled correctly!" << endl;
+	 return;
+      }
+
+      cout << word << "' not found in dictionary.\n" ;
+      cout << "Suggestions: ";
+
+      TrieNode* curr = root;
+      string prefix = "";
+      for (char c : word) {
+           int index = c - 'a';
+           if (!curr->children[index]) {
+	       break;
+	   }
+           prefix += c;
+           curr = curr->children[index];
+     }
+
+     vector<string> suggestions;
+     collectSuggestions( curr, prefix, suggestions);
+
+     if (suggestions.empty()) {
+ 	cout << "No close matches found." << endl;
+     } else {
+	cout << endl;
+	for (string s : suggestions) {
+	    cout << " - "<< s << endl;
+	}
+     }
 }
